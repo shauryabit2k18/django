@@ -48,3 +48,8 @@ def posts_update(request , slug):
         'form': form
     }
     return render(request , "posts/posts_update.html" , context)
+
+def posts_delete(request , slug):
+    unique_post = get_object_or_404(Post , slug = slug)
+    unique_post.delete()
+    return redirect('/posts')
