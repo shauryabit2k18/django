@@ -17,6 +17,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return "/posts/{}/".format(self.slug)
+
+    def get_update_url(self):
+        return "/posts/{}/update/".format(self.slug)
+
+    def get_delete_url(self):
+        return "/posts/{}/delete/".format(self.slug)
     
     
 class Author(models.Model):

@@ -1,6 +1,8 @@
 {% extends 'posts/base.html' %}
 
 {% block content%}
+    <h1> My Blog Post <a href="/posts/create/"><button class="btn btn-default">Create a Blog</button></a><h1>
+    <hr>
     {% for post in all_posts %}
         <div class="row">
             <img src="{{ post.image.url }}" class="img-responsive">

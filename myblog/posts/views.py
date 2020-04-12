@@ -1,5 +1,5 @@
 from django.shortcuts import render , get_object_or_404 , redirect
-
+from django.contrib import messages
 # Create your views here.
 
 from .forms import PostModelForm
@@ -10,6 +10,7 @@ def posts_list(request):
     context = {
         'all_posts' : all_posts
     }
+    messages.info(request , 'Here are all the current blog posts')
     return render(request , "posts/posts_list.html" , context)
 
 # CRUD(Create Retrieve Update and delete)
@@ -19,6 +20,7 @@ def posts_detail(request , slug):
     context = {
         'post': unique_post
     }
+    messages.info(request , 'This is the specific detail view')
     return render(request , "posts/post_detail.html" , context)
 
 def posts_create(request):
@@ -30,7 +32,8 @@ def posts_create(request):
     if form.is_valid():
         form.instance.author = author
         form.save()
-        return redirect('/posts/')
+        messages.info(request , 'Successfully created a blog posts')
+        return redirect("/posts/")
     context = {
         'form': form
     }
@@ -43,7 +46,8 @@ def posts_update(request , slug):
                         instance=unique_post)
     if form.is_valid():
         form.save()
-        return redirect('/posts/')
+        messages.info(request , 'Successfully updated your blog posts')
+        return redirect("/posts/{}/".format(slug))
     context = {
         'form': form
     }
@@ -52,4 +56,5 @@ def posts_update(request , slug):
 def posts_delete(request , slug):
     unique_post = get_object_or_404(Post , slug = slug)
     unique_post.delete()
+    messages.info(request , 'Successfully deleted the blog posts')
     return redirect('/posts')
