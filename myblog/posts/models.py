@@ -14,6 +14,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return "/posts/{}/".format(self.slug)
+    
     
 class Author(models.Model):
     user = models.ForeignKey(User , on_delete=models.CASCADE)
